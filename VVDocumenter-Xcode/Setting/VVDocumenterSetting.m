@@ -28,7 +28,7 @@ NSString *const kVVDNoBlankLinesBetweenFields = @"com.onevcat.VVDocumenter.noBla
     dispatch_once(&once, ^ {
         defaultSetting = [[VVDocumenterSetting alloc] init];
         
-        NSDictionary *defaults = @{kVVDPrefixWithStar: @YES,
+        NSDictionary *defaults = @{kVVDPrefixWithSlashes: @YES,
                                    kVVDUseSpaces: @YES};
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
