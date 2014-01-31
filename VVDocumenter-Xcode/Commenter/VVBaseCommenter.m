@@ -32,7 +32,7 @@
     if ([[VVDocumenterSetting defaultSetting] useHeaderDoc]) {
         return [NSString stringWithFormat:@"%@/*!\n%@<#Description#>\n", self.indent, self.prefixString];
     } else if ([[VVDocumenterSetting defaultSetting] prefixWithSlashes]) {
-        return [NSString stringWithFormat:@"%@<#Description#>\n", self.prefixString];
+        return [NSString stringWithFormat:@"%@\n%@<#Description#>\n", self.prefixString, self.prefixString];
     } else {
         return [NSString stringWithFormat:@"%@/**\n%@<#Description#>\n", self.indent, self.prefixString];
     }
@@ -77,7 +77,7 @@
 -(NSString *) endComment
 {
     if ([[VVDocumenterSetting defaultSetting] prefixWithSlashes]) {
-        return @"";
+        return [NSString stringWithFormat:@"%@",self.prefixString];
     } else {
         return [NSString stringWithFormat:@"%@ */",self.indent];
     }
@@ -85,20 +85,14 @@
 
 -(NSString *) document
 {
-    NSString * comment = [NSString stringWithFormat:@"%@%@%@%@%@",
+    NSString * comment = [NSString stringWithFormat:@"%@%@%@%@%@\n",
                           [self startComment],
                           [self argumentsComment],
                           [self returnComment],
                           [self sinceComment],
                           [self endComment]];
 
-    // The last line of the comment should be adjacent to the next line of code,
-    // back off the newline from the last comment component.
-    if ([[VVDocumenterSetting defaultSetting] prefixWithSlashes]) {
-        return [comment stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    } else {
-        return comment;
-    }
+    return comment;
 }
 
 -(NSString *) emptyLine
@@ -111,7 +105,7 @@
     if ([[VVDocumenterSetting defaultSetting] prefixWithStar]) {
         return [NSString stringWithFormat:@"%@ *%@", self.indent, self.space];
     } else if ([[VVDocumenterSetting defaultSetting] prefixWithSlashes]) {
-        return [NSString stringWithFormat:@"%@///%@", self.indent, self.space];
+        return [NSString stringWithFormat:@"%@//%@", self.indent, self.space];
     } else {
         return [NSString stringWithFormat:@"%@ ", self.indent];
     }

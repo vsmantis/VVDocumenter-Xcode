@@ -27,7 +27,7 @@ NSString *const kVVDUserHeaderDoc = @"com.onevcat.VVDocumenter.useHeaderDoc";
     dispatch_once(&once, ^ {
         defaultSetting = [[VVDocumenterSetting alloc] init];
         
-        NSDictionary *defaults = @{kVVDPrefixWithStar: @YES,
+        NSDictionary *defaults = @{kVVDPrefixWithSlashes: @YES,
                                    kVVDUseSpaces: @YES};
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
