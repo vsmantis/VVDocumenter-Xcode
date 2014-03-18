@@ -53,6 +53,12 @@
     [self addSettingMenu];
 }
 
+/*******/
+
+    #pragma mark - <#Section Name#>
+
+/*******/
+
 -(void) addSettingMenu
 {
     NSMenuItem *editMenuItem = [[NSApp mainMenu] itemWithTitle:@"Window"];
